@@ -1,0 +1,254 @@
+{
+  "verdict": "REJECT",
+  "audits": {
+    "A1_definition_lock": {
+      "status": "FAIL",
+      "rationale": "System prompt uses undefined meta-terms: 'operational definition', 'measurable criteria', 'bounded taxonomy', 'explicit', 'missing', 'core', 'normative term', 'elastic term', 'exact', 'conservative'. Self-referential failure: requires operational definitions but does not operationally define what makes a definition 'operational'."
+    },
+    "A2_authority_declaration": {
+      "status": "FAIL",
+      "rationale": "No authority declaration for scanning authority. Does not specify: who holds authority to issue verdicts (LLM? human operator? prompt author?), source of legitimacy, revocation mechanism, or conflict resolution rule (what if two scans disagree?)."
+    },
+    "A3_irreversibility_control": {
+      "status": "FAIL",
+      "rationale": "Verdict issuance (PASS/REJECT) is irreversible when published (reputational impact, caching, redistribution) but is not identified as such. No authorization checkpoint before verdict issuance. No rollback mechanism or freeze behavior for uncertain cases."
+    },
+    "A4_failure_enumeration": {
+      "status": "FAIL",
+      "rationale": "System prompt does not enumerate governance failure modes for the scanning process itself. Missing: scanner capture, prompt injection, audit criteria drift, inconsistent verdicts, over-rejection, under-rejection, authority laundering via scanner, scope creep."
+    },
+    "A5_recursive_containment": {
+      "status": "FAIL",
+      "rationale": "Amendment process not defined. Implicitly, repository maintainers can modify prompt without external constraints. No routing to higher authority or external covenant. Prompt can self-amend via repo access."
+    }
+  },
+  "violations": [
+    {
+      "code": "META-TERM-UNDEF",
+      "severity": "CRITICAL",
+      "audit": "A1",
+      "message": "System prompt requires 'operational definitions' but does not operationally define what constitutes an 'operational definition'. Self-referential failure.",
+      "evidence": {
+        "quotes": [
+          "For each extracted term, verify an operational definition exists: measurable criteria OR explicit decision procedure OR explicit mapping to a bounded taxonomy with thresholds."
+        ],
+        "locations": ["lines 31-34"]
+      },
+      "suggested_fix": "Define meta-terms: 'operational definition' = definition including at least one of (a) measurable threshold, (b) explicit procedure, (c) bounded taxonomy. 'Measurable criteria' = criteria evaluable via quantitative metric or binary check. 'Bounded taxonomy' = closed set with explicit membership rules."
+    },
+    {
+      "code": "ELASTIC-META-TERMS",
+      "severity": "MAJOR",
+      "audit": "A1",
+      "message": "Multiple elastic meta-terms used without operationalization: 'explicit', 'missing', 'core', 'exact', 'conservative'.",
+      "evidence": {
+        "quotes": [
+          "If information is missing, you must REJECT",
+          "Framework must explicitly state",
+          "If any core normative term is undefined",
+          "You must be exact. You must be conservative."
+        ],
+        "locations": ["line 21", "line 38", "line 35", "line 79"]
+      },
+      "suggested_fix": "Define: 'Missing' = not stated in text and not restated from external refs. 'Explicit' = stated in framework text, not inferable. 'Core' = term determining PASS/REJECT or governing irreversible actions. 'Exact' = using quoted text only. 'Conservative' = defaulting to REJECT when uncertain."
+    },
+    {
+      "code": "AUTH-UNDECLARED",
+      "severity": "CRITICAL",
+      "audit": "A2",
+      "message": "No authority declaration for who may issue verdicts or why they are legitimate. Scanner authority is implicit.",
+      "evidence": {
+        "quotes": [
+          "You are a STRICT, NON-PERSUASIVE, NON-OPTIMIZING checker.",
+          "Your job is to decide whether a proposed governance/framework text may be instantiated."
+        ],
+        "locations": ["line 3", "line 4"]
+      },
+      "suggested_fix": "Add authority declaration: 'Authority Holder: Human operator using Ω-SCAN. Source of Legitimacy: Derived from operator's organizational role. Revocation: Governed by external org policies. Conflict Rule: Most conservative verdict prevails until external review.'"
+    },
+    {
+      "code": "AUTH-NO-REVOCATION",
+      "severity": "MAJOR",
+      "audit": "A2",
+      "message": "No mechanism to revoke scanner authority if compromised or misused.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Specify: 'Scanner authority may be revoked by [designated external governance body]. Revocation triggers immediate halt of verdict issuance.'"
+    },
+    {
+      "code": "AUTH-NO-CONFLICT",
+      "severity": "MAJOR",
+      "audit": "A2",
+      "message": "No conflict resolution rule for disagreement between multiple scans or between scanner and human operator.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Add conflict rule: 'If multiple scans disagree, most conservative (REJECT) verdict prevails until resolved by external governance. Human operator may override scanner verdict with documented rationale.'"
+    },
+    {
+      "code": "IRREVERSIBLE-UNIDENTIFIED",
+      "severity": "CRITICAL",
+      "audit": "A3",
+      "message": "Verdict issuance is irreversible (especially when published) but is not identified as such. No checkpoint or rollback mechanism.",
+      "evidence": {
+        "quotes": [
+          "Return JSON with: verdict: PASS or REJECT"
+        ],
+        "locations": ["line 68"]
+      },
+      "suggested_fix": "Identify: 'Verdict issuance (PASS/REJECT) is irreversible when published. Checkpoint: Human operator must review before publication. Rollback: Verdicts may be revised via formal erratum with justification. Freeze: Uncertain cases default to HOLD pending review.'"
+    },
+    {
+      "code": "NO-CHECKPOINT",
+      "severity": "MAJOR",
+      "audit": "A3",
+      "message": "No authorization checkpoint required before issuing verdict. LLM output is treated as final without human approval.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Add checkpoint: 'All verdicts must be reviewed and approved by human operator before publication or use in governance decisions.'"
+    },
+    {
+      "code": "NO-FAILURE-ENUM",
+      "severity": "CRITICAL",
+      "audit": "A4",
+      "message": "System prompt does not enumerate any governance failure modes for the scanning process itself.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Enumerate failure modes: (1) Scanner Capture - adversary controls LLM/operator, (2) Prompt Injection - framework text manipulates scanner, (3) Audit Criteria Drift - prompt changes invalidate verdicts, (4) Inconsistent Verdicts - non-deterministic outputs, (5) Authority Laundering - PASS verdicts used to claim legitimacy without covenant."
+    },
+    {
+      "code": "NO-AMENDMENT",
+      "severity": "CRITICAL",
+      "audit": "A5",
+      "message": "Amendment process not defined. Implicitly, prompt can be modified by repository maintainers without external governance constraints.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Define amendment process: 'This prompt may not self-amend. Amendments require: (a) proposal with rationale, (b) public comment (≥14 days), (c) independent review, (d) Governance Board approval, (e) version increment. Board composition defined in external covenant.'"
+    },
+    {
+      "code": "RECURSIVE-SELF-AUTH",
+      "severity": "MAJOR",
+      "audit": "A5",
+      "message": "No external covenant constraint. Prompt can authorize its own amendments via repository access control.",
+      "evidence": {
+        "quotes": [],
+        "locations": []
+      },
+      "suggested_fix": "Route amendments to external governance: 'All amendments must be approved by Ω-SCAN Governance Board, whose authority is derived from external covenant (not this prompt).'"
+    }
+  ],
+  "extracted": {
+    "normative_terms": [
+      {
+        "term": "operational definition",
+        "usage_quotes": ["verify an operational definition exists"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "measurable criteria",
+        "usage_quotes": ["measurable criteria OR explicit decision procedure"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "bounded taxonomy",
+        "usage_quotes": ["explicit mapping to a bounded taxonomy with thresholds"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "explicit",
+        "usage_quotes": ["Framework must explicitly state", "unless they are fully restated"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "missing",
+        "usage_quotes": ["If information is missing, you must REJECT"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "core normative term",
+        "usage_quotes": ["If any core normative term is undefined"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "elastic term",
+        "usage_quotes": ["'Voluntary', 'as appropriate', 'reasonable', 'robust', 'safe', 'trusted', 'responsible', 'acceptable' are ELASTIC TERMS"],
+        "is_defined": false,
+        "definition_quote": "Defined by example only, no formal definition provided"
+      },
+      {
+        "term": "Framework",
+        "usage_quotes": ["Framework = any document that prescribes policies..."],
+        "is_defined": true,
+        "definition_quote": "Framework = any document that prescribes policies, rules, processes, governance, deployment criteria, risk management, enforcement, prohibitions, permissions, thresholds, or decision procedures."
+      },
+      {
+        "term": "Instantiation",
+        "usage_quotes": ["Instantiation = being used to govern any system, org, or decision."],
+        "is_defined": true,
+        "definition_quote": "Instantiation = being used to govern any system, org, or decision."
+      },
+      {
+        "term": "PASS",
+        "usage_quotes": ["verdict: PASS or REJECT"],
+        "is_defined": false,
+        "definition_quote": null
+      },
+      {
+        "term": "REJECT",
+        "usage_quotes": ["verdict: PASS or REJECT", "Default stance is REJECT"],
+        "is_defined": false,
+        "definition_quote": null
+      }
+    ],
+    "authorities": [],
+    "irreversible_actions": [
+      {
+        "action": "Verdict Issuance (PASS or REJECT)",
+        "trigger": "Completion of audit analysis",
+        "checkpoint_required": false,
+        "rollback_defined": false,
+        "evidence_quotes": ["Return JSON with: verdict: PASS or REJECT"]
+      }
+    ],
+    "amendment_clauses": [],
+    "external_dependencies": [
+      {
+        "name": "JSON Schema (provided by user)",
+        "is_provided_in_input": true,
+        "impact_if_missing": "Scanner cannot validate output format"
+      },
+      {
+        "name": "LLM executing the prompt",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - scanner cannot function without execution environment"
+      },
+      {
+        "name": "Human operator (implied)",
+        "is_provided_in_input": false,
+        "impact_if_missing": "Unclear who has final authority over verdicts"
+      }
+    ]
+  },
+  "minimal_remediation": [
+    "A1: Define all meta-terms operationally (operational definition, measurable criteria, bounded taxonomy, explicit, missing, core, elastic term, exact, conservative, PASS, REJECT).",
+    "A2: Add authority declaration specifying human operator as authority holder, source of legitimacy from organizational role, revocation mechanism via external governance, and conflict rule (most conservative verdict prevails).",
+    "A3: Identify verdict issuance as irreversible action, require human checkpoint before publication, define rollback mechanism (formal erratum process), and add freeze behavior (HOLD for uncertain cases).",
+    "A4: Enumerate at least 5 governance failure modes for the scanning process: scanner capture, prompt injection, audit criteria drift, inconsistent verdicts, authority laundering via scanner.",
+    "A5: Define amendment process with external governance constraints. Require Governance Board approval (composition defined in external covenant), public comment period, independent review, and version control. Prohibit self-authorized amendments."
+  ]
+}
