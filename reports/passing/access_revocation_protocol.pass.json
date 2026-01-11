@@ -1,0 +1,116 @@
+{
+  "verdict": "PASS",
+  "audits": {
+    "A1_definition_lock": {
+      "status": "PASS",
+      "rationale": "All normative terms operationally defined: System Access (3 states), Abuse Event (3 criteria), Abuse Taxonomy (bounded classification with thresholds)."
+    },
+    "A2_authority_declaration": {
+      "status": "PASS",
+      "rationale": "Exemplary authority declaration. Primary (AC) and Final (System Owner) authorities explicitly identified with scope constraints, legitimacy sources (appointment + charter), revocation mechanisms (immediate), and comprehensive conflict rules (AC-AC, AC-Owner, ownership dispute). Freeze-on-dispute rule present."
+    },
+    "A3_irreversibility_control": {
+      "status": "PASS",
+      "rationale": "No irreversible actions. All revocations appealable, suspensions auto-expire, restoration process explicit. Safeguards prevent permanent harm."
+    },
+    "A4_failure_enumeration": {
+      "status": "PASS",
+      "rationale": "Six governance failure modes enumerated: authority laundering, revocation abuse, conflict deadlock, taxonomy drift, appeal suppression, owner capture. Mitigations specified."
+    },
+    "A5_recursive_containment": {
+      "status": "PASS",
+      "rationale": "Self-amendment explicitly prohibited. Amendments require System Owner approval + Charter reference + public comment. Scope expansion prohibited. External governance required."
+    }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      {
+        "term": "System Access",
+        "usage_quotes": ["The ability to authenticate to and use designated system capabilities."],
+        "is_defined": true,
+        "definition_quote": "Access is either: ACTIVE (can authenticate), SUSPENDED (temporarily blocked, ≤ 30 days), REVOKED (permanently blocked)"
+      },
+      {
+        "term": "Abuse Event",
+        "usage_quotes": ["An event satisfying ALL of the following..."],
+        "is_defined": true,
+        "definition_quote": "1. Violation of documented acceptable use policy (AUP), 2. Confirmed by automated logging AND human review, 3. Severity classification of MEDIUM or higher per abuse taxonomy"
+      },
+      {
+        "term": "Abuse Taxonomy",
+        "usage_quotes": ["Severity classification of MEDIUM or higher per abuse taxonomy"],
+        "is_defined": true,
+        "definition_quote": "A bounded classification system with three severity levels: LOW, MEDIUM, HIGH (See Appendix A for complete taxonomy and examples)"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "Access Controller (AC)",
+        "scope": "Execute suspension and revocation decisions; limited to access modification only",
+        "legitimacy_source": "Derived from appointment by System Owner and technical certification (ARP-CERT-001)",
+        "revocation": "System Owner may revoke AC designation at any time; takes effect immediately upon registry update",
+        "conflict_rule": "AC-to-AC: access remains ACTIVE until System Owner decides OR majority vote if ≥3 ACs. AC-to-Owner: System Owner decision is final.",
+        "evidence_quotes": [
+          "Primary Authority: Access Controller (AC) - Power: Execute suspension and revocation decisions",
+          "Access Controller legitimacy: Derived from appointment by System Owner and technical certification"
+        ]
+      },
+      {
+        "name": "System Owner",
+        "scope": "Appoint/revoke Access Controllers, override revocation decisions, amend this protocol",
+        "legitimacy_source": "Derived from System Charter (external document, must be provided)",
+        "revocation": "Governed by System Charter (external to this protocol)",
+        "conflict_rule": "System Owner decision is final in AC-to-Owner conflicts. Framework FREEZES if System Owner authority is disputed.",
+        "evidence_quotes": [
+          "Final Authority: System Owner - Power: Appoint/revoke Access Controllers, override revocation decisions, amend this protocol",
+          "System Owner legitimacy: Derived from System Charter (external document, must be provided)",
+          "If System Owner authority is disputed, this framework FREEZES."
+        ]
+      }
+    ],
+    "irreversible_actions": [],
+    "amendment_clauses": [
+      {
+        "type": "amendment",
+        "quote": "All amendments require: 1. System Owner approval, 2. Reference to System Charter amendment clause, 3. Public comment period (≥ 7 days) for affected users, 4. Updated version published with changelog"
+      },
+      {
+        "type": "governance",
+        "quote": "This framework may not modify itself."
+      },
+      {
+        "type": "scope",
+        "quote": "Amendments may not: Add new irreversible actions, Grant Access Controllers powers beyond access modification, Remove appeal rights, Weaken authority declaration requirements"
+      }
+    ],
+    "external_dependencies": [
+      {
+        "name": "System Charter",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - defines System Owner legitimacy; framework MUST NOT be instantiated without it"
+      },
+      {
+        "name": "Acceptable Use Policy (AUP)",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - defines prohibited behaviors; no abuse events can be confirmed without it"
+      },
+      {
+        "name": "Access Controller Registry",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - lists authorized ACs; cannot verify AC legitimacy without it"
+      },
+      {
+        "name": "Abuse Taxonomy (Appendix A)",
+        "is_provided_in_input": true,
+        "impact_if_missing": "CRITICAL - provides bounded severity classification (illustrative version included)"
+      },
+      {
+        "name": "Training Certification Program (ARP-CERT-001)",
+        "is_provided_in_input": false,
+        "impact_if_missing": "REQUIRED - AC qualification standard"
+      }
+    ]
+  },
+  "minimal_remediation": []
+}

@@ -1,0 +1,132 @@
+{
+  "verdict": "PASS",
+  "audits": {
+    "A1_definition_lock": {
+      "status": "PASS",
+      "rationale": "Exemplary definition lock. All normative terms operationalized with measurable thresholds: Capability Levels (5 discrete levels with specific benchmark percentages), Safeguard Requirements (concrete metrics: ≥95% recall, ≤10 queries/hour, 100% logging), Concerning Behavior (3 categories with operational test batteries), Risk Taxonomy (5 bounded categories with explicit criteria). No elastic terms remain undefined."
+    },
+    "A2_authority_declaration": {
+      "status": "PASS",
+      "rationale": "Assessment Authority (TST) and Governance Board explicitly identified with scope, legitimacy sources (Organization/Governance Charters), decision boundaries, and conflict resolution rules (defaults to HOLD, most conservative prevails)."
+    },
+    "A3_irreversibility_control": {
+      "status": "PASS",
+      "rationale": "No irreversible actions. All APPROVE/HOLD decisions reversible via re-assessment. Regression testing allows reversal of progressions. No deployment or deletion within scope."
+    },
+    "A4_failure_enumeration": {
+      "status": "PASS",
+      "rationale": "Six governance failure modes enumerated: threshold gaming, safeguard theater, concerning behavior dismissal, benchmark obsolescence, authority capture, governance board bypass. Mitigations specified for each."
+    },
+    "A5_recursive_containment": {
+      "status": "PASS",
+      "rationale": "Self-amendment explicitly prohibited. Amendments require external review, public comment, Board approval. Prohibited amendments clearly defined. External governance required."
+    }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      {
+        "term": "Capability Level",
+        "usage_quotes": ["A discrete classification of system capability with specific, measurable thresholds"],
+        "is_defined": true,
+        "definition_quote": "CL-0: <40% benchmark, ≤100 tokens, no tools | CL-1: ≥40% AND <70%, ≤2000 tokens | CL-2: ≥70% AND <90%, ≤10000 tokens, read-only tools | CL-3: ≥90%, unlimited tokens, read+write tools | CL-4: ≥95% OR novel capability, unrestricted"
+      },
+      {
+        "term": "Progression Decision",
+        "usage_quotes": ["A binary determination (APPROVE or HOLD)"],
+        "is_defined": true,
+        "definition_quote": "APPROVE: System meets all threshold criteria AND satisfies safeguard requirements. HOLD: System meets threshold BUT lacks safeguards, OR exhibits concerning behavior."
+      },
+      {
+        "term": "Safeguard Requirement",
+        "usage_quotes": ["For each capability level, the following safeguards MUST be demonstrated"],
+        "is_defined": true,
+        "definition_quote": "Explicit matrix: CL-0→1: toxicity filter ≥95% recall, 100 samples zero failures | CL-1→2: rate limit ≤10/hour, injection robustness ≥90% | CL-2→3: audit logging 100%, rollback tested ≥50 scenarios | CL-3→4: third-party eval + Board unanimous approval"
+      },
+      {
+        "term": "Concerning Behavior",
+        "usage_quotes": ["Behavior that triggers automatic HOLD regardless of benchmark performance"],
+        "is_defined": true,
+        "definition_quote": "Category A: Deception (false claims, false citations, concealing limitations) | Category B: Autonomy Seeking (prevent shutdown, request privileges, create backups) | Category C: Goal Misalignment (refuse safety instructions ≥3 times, proxy optimization, reward hacking)"
+      },
+      {
+        "term": "Risk Taxonomy",
+        "usage_quotes": ["All observed risks must be classified into exactly one category"],
+        "is_defined": true,
+        "definition_quote": "Negligible (no user impact, cosmetic, <5% degradation) | Minor (confusion, non-critical errors, 5-20% degradation) | Moderate (critical task errors no harm, single user privacy leak, 20-50% degradation) | Major (reversible harm, multi-user leak, instability) | Critical (irreversible harm, breach, security compromise, concerning behavior)"
+      }
+    ],
+    "authorities": [
+      {
+        "name": "Technical Safety Team (TST)",
+        "scope": "APPROVE/HOLD determinations for CL-0 through CL-3",
+        "legitimacy_source": "Derived from Development Organization Charter (external document)",
+        "revocation": "Development Organization may replace TST members via Charter amendment process",
+        "conflict_rule": "Internal conflict defaults to HOLD. TST vs Board: Board final for CL-3→4, TST final for lower. Multiple assessments: most conservative (HOLD) prevails.",
+        "evidence_quotes": [
+          "Assessment Authority: Technical Safety Team (TST), a group of ≥ 3 qualified engineers designated by the Development Organization",
+          "TST internal conflict: Decision defaults to HOLD until consensus"
+        ]
+      },
+      {
+        "name": "Governance Board",
+        "scope": "CL-3 → CL-4 approval only (requires unanimous consent)",
+        "legitimacy_source": "Designated in Governance Charter (external document)",
+        "revocation": "Development Organization may replace entire Governance Board via Charter amendment process",
+        "conflict_rule": "Governance Board decision is final for CL-3→4; TST decision final for lower levels",
+        "evidence_quotes": [
+          "For CL-3 → CL-4 only, requires unanimous Governance Board approval",
+          "Governance Board Composition: ≥ 5 members, ≥ 2 external to Development Organization"
+        ]
+      }
+    ],
+    "irreversible_actions": [],
+    "amendment_clauses": [
+      {
+        "type": "amendment",
+        "quote": "Amendments require: 1. Proposal from Development Organization leadership, 2. Technical review by independent safety evaluator, 3. Public comment period (≥ 14 days), 4. Governance Board approval (unanimous), 5. Version increment and changelog"
+      },
+      {
+        "type": "governance",
+        "quote": "This framework may not modify its own thresholds, definitions, or safeguard requirements."
+      },
+      {
+        "type": "scope",
+        "quote": "The following changes constitute a new framework requiring full re-evaluation: Weakening capability level thresholds, Removing safeguard requirements, Expanding scope to deployment authorization, Removing concerning behavior categories, Reducing Governance Board independence requirement"
+      }
+    ],
+    "external_dependencies": [
+      {
+        "name": "Development Organization Charter",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - defines TST and Governance Board legitimacy"
+      },
+      {
+        "name": "Governance Charter",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - specifies Board composition and amendment authority"
+      },
+      {
+        "name": "Benchmark Suite A (version 2024-Q4)",
+        "is_provided_in_input": true,
+        "impact_if_missing": "CRITICAL - versioned evaluation dataset (MMLU, HumanEval, MATH, TruthfulQA referenced)"
+      },
+      {
+        "name": "Technical Appendix B",
+        "is_provided_in_input": false,
+        "impact_if_missing": "CRITICAL - concerning behavior test batteries"
+      },
+      {
+        "name": "ToxiGen benchmark",
+        "is_provided_in_input": false,
+        "impact_if_missing": "REQUIRED - toxicity evaluation dataset"
+      },
+      {
+        "name": "PromptGuard eval",
+        "is_provided_in_input": false,
+        "impact_if_missing": "REQUIRED - injection robustness tests"
+      }
+    ]
+  },
+  "minimal_remediation": []
+}
