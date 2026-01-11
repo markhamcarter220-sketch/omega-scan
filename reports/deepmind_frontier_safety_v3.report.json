@@ -1,0 +1,35 @@
+{
+  "verdict": "REJECT",
+  "confidence": "strong",
+  "audits": {
+    "A1_definition_lock": { "status": "FAIL", "rationale": "Elastic terms (adequate, material risk) used without operationalization." },
+    "A2_authority_declaration": { "status": "FAIL", "rationale": "Governance bodies referenced but no explicit authority ledger." },
+    "A3_irreversibility_control": { "status": "FAIL", "rationale": "Escalations are irreversible without checkpoint+rollback." },
+    "A4_failure_enumeration": { "status": "FAIL", "rationale": "No governance failure enumeration." },
+    "A5_recursive_containment": { "status": "FAIL", "rationale": "Annual self-update clause without external covenant." }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      { "term": "adequate", "usage_quotes": ["...mitigations are adequate..."], "is_defined": false, "definition_quote": null },
+      { "term": "material risk", "usage_quotes": ["...reduce material risk."], "is_defined": false, "definition_quote": null }
+    ],
+    "authorities": [
+      { "name": "appropriate governance bodies", "scope": "review high-risk decisions", "legitimacy_source": null, "revocation": null, "conflict_rule": null, "evidence_quotes": ["Appropriate governance bodies will review high-risk decisions."] }
+    ],
+    "irreversible_actions": [
+      { "action": "escalate mitigations", "trigger": "circumstances", "checkpoint_required": false, "rollback_defined": false, "evidence_quotes": ["We may escalate mitigations depending on circumstances."] }
+    ],
+    "amendment_clauses": [
+      { "type": "update", "quote": "We will update the framework at least annually." }
+    ],
+    "external_dependencies": []
+  },
+  "minimal_remediation": [
+    "Define elastic terms with thresholds or procedures.",
+    "Declare explicit authority ledger, legitimacy, revocation, conflict rule.",
+    "Add irreversibility checkpoint + rollback/freeze semantics.",
+    "Enumerate governance failure modes.",
+    "Route amendments to external covenant."
+  ]
+}

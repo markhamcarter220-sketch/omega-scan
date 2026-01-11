@@ -1,0 +1,8 @@
+TITLE: Fixture Excerpt — NIST RMF-style framework (short excerpt)
+NOTE: This is an intentionally short excerpt for testing Ω-SCAN mechanics.
+
+EXCERPT:
+- "This voluntary framework provides guidance to manage AI risks."
+- "Organizations should pursue trustworthy AI, including safety and effectiveness."
+- "Practices should be appropriate to context and risk."
+- "This framework is intended to be flexible and adaptable."

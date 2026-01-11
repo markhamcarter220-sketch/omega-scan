@@ -1,0 +1,32 @@
+{
+  "verdict": "REJECT",
+  "confidence": "strong",
+  "audits": {
+    "A1_definition_lock": { "status": "FAIL", "rationale": "Uses 'as appropriate' and levels without operational criteria in excerpt." },
+    "A2_authority_declaration": { "status": "FAIL", "rationale": "Leadership approves but no revocation/conflict rule." },
+    "A3_irreversibility_control": { "status": "FAIL", "rationale": "Deployment approvals are irreversible without rollback/freeze." },
+    "A4_failure_enumeration": { "status": "FAIL", "rationale": "No governance failure modes enumerated." },
+    "A5_recursive_containment": { "status": "FAIL", "rationale": "Strengthen over time implies iterative amendment without covenant constraint." }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      { "term": "as appropriate", "usage_quotes": ["...mitigate risks as appropriate."], "is_defined": false, "definition_quote": null }
+    ],
+    "authorities": [
+      { "name": "Leadership", "scope": "deployment approval", "legitimacy_source": null, "revocation": null, "conflict_rule": null, "evidence_quotes": ["Leadership approves deployment decisions in consultation with safety leads."] }
+    ],
+    "irreversible_actions": [
+      { "action": "approve deployment", "trigger": null, "checkpoint_required": false, "rollback_defined": false, "evidence_quotes": ["Leadership approves deployment decisions in consultation with safety leads."] }
+    ],
+    "amendment_clauses": [
+      { "type": "update", "quote": "We will strengthen safeguards over time as the threat model evolves." }
+    ],
+    "external_dependencies": []
+  },
+  "minimal_remediation": [
+    "Operationalize level thresholds in-document.",
+    "Declare authority legitimacy, revocation, and conflict-freeze rule.",
+    "Add irreversibility table with checkpoint + rollback/freeze semantics."
+  ]
+}

@@ -1,0 +1,8 @@
+TITLE: Fixture Excerpt — Preparedness-style framework (short excerpt)
+NOTE: This is an intentionally short excerpt for testing Ω-SCAN mechanics.
+
+EXCERPT:
+- "We define 'severe harm' as events resulting in mass casualties or very large economic damages."
+- "A Safety Advisory Group reviews evaluations and determines readiness."
+- "We will update this framework periodically as our understanding improves."
+- "We may restrict deployment if risk thresholds are exceeded."

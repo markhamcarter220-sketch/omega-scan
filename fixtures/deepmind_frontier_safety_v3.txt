@@ -1,0 +1,8 @@
+TITLE: Fixture Excerpt — Frontier safety framework (short excerpt)
+NOTE: This is an intentionally short excerpt for testing Ω-SCAN mechanics.
+
+EXCERPT:
+- "We will assess whether mitigations are adequate to reduce material risk."
+- "We will update the framework at least annually."
+- "Appropriate governance bodies will review high-risk decisions."
+- "We may escalate mitigations depending on circumstances."

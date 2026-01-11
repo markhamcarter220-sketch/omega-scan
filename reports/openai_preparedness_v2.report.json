@@ -1,0 +1,60 @@
+{
+  "verdict": "REJECT",
+  "confidence": "strong",
+  "audits": {
+    "A1_definition_lock": {
+      "status": "PASS",
+      "rationale": "Severe harm thresholds are operationally defined."
+    },
+    "A2_authority_declaration": {
+      "status": "FAIL",
+      "rationale": "Internal bodies have final authority without explicit revocation or conflict-freeze rules."
+    },
+    "A3_irreversibility_control": {
+      "status": "FAIL",
+      "rationale": "Deployment restrictions and access suspension are irreversible actions without explicit rollback conditions."
+    },
+    "A4_failure_enumeration": {
+      "status": "FAIL",
+      "rationale": "Framework enumerates model risks but not governance failure modes."
+    },
+    "A5_recursive_containment": {
+      "status": "FAIL",
+      "rationale": "Self-update clause present without external covenant constraint."
+    }
+  },
+  "violations": [
+    {
+      "code": "AUTH-IMPLICIT",
+      "severity": "CRITICAL",
+      "audit": "A2",
+      "message": "Authority is exercised by internal committees without revocation or arbitration.",
+      "evidence": {
+        "quotes": ["A Safety Advisory Group reviews evaluations and determines readiness."],
+        "locations": ["fixtures/openai_preparedness_v2.txt:L4"]
+      },
+      "suggested_fix": "Add explicit legitimacy source, revocation/rotation, and conflict rule."
+    }
+  ],
+  "extracted": {
+    "normative_terms": [
+      { "term": "severe harm", "usage_quotes": ["We define 'severe harm'..."], "is_defined": true, "definition_quote": "We define 'severe harm' as events resulting in mass casualties or very large economic damages." },
+      { "term": "risk thresholds", "usage_quotes": ["...if risk thresholds are exceeded."], "is_defined": false, "definition_quote": null }
+    ],
+    "authorities": [
+      { "name": "Safety Advisory Group", "scope": "readiness determination", "legitimacy_source": null, "revocation": null, "conflict_rule": null, "evidence_quotes": ["A Safety Advisory Group reviews evaluations and determines readiness."] }
+    ],
+    "irreversible_actions": [
+      { "action": "restrict deployment", "trigger": "risk thresholds exceeded", "checkpoint_required": false, "rollback_defined": false, "evidence_quotes": ["We may restrict deployment if risk thresholds are exceeded."] }
+    ],
+    "amendment_clauses": [
+      { "type": "update", "quote": "We will update this framework periodically as our understanding improves." }
+    ],
+    "external_dependencies": []
+  },
+  "minimal_remediation": [
+    "Add explicit authority declaration with revocation and conflict rules.",
+    "Enumerate governance failure modes.",
+    "Route amendments to an external covenant."
+  ]
+}

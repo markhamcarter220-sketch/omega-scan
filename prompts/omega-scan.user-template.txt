@@ -1,0 +1,9 @@
+Return JSON that matches the following JSON Schema exactly:
+<<<
+[PASTE JSON SCHEMA HERE]
+>>>
+
+Framework text:
+<<<
+[PASTE FRAMEWORK TEXT HERE]
+>>>

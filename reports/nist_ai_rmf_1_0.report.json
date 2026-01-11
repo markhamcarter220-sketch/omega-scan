@@ -1,0 +1,31 @@
+{
+  "verdict": "REJECT",
+  "confidence": "strong",
+  "audits": {
+    "A1_definition_lock": { "status": "FAIL", "rationale": "Trustworthy/safe/effective/appropriate used as elastic terms without lock in excerpt." },
+    "A2_authority_declaration": { "status": "FAIL", "rationale": "Voluntary guidance lacks binding authority semantics." },
+    "A3_irreversibility_control": { "status": "FAIL", "rationale": "Recommends deployment/monitoring practices but does not classify irreversible actions or require checkpoint+rollback/freeze." },
+    "A4_failure_enumeration": { "status": "FAIL", "rationale": "No meta-governance failure analysis." },
+    "A5_recursive_containment": { "status": "FAIL", "rationale": "Framework is flexible and adaptable without external covenant constraint on amendments." }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      { "term": "trustworthy", "usage_quotes": ["Organizations should pursue trustworthy AI..."], "is_defined": false, "definition_quote": null },
+      { "term": "appropriate", "usage_quotes": ["Practices should be appropriate to context..."], "is_defined": false, "definition_quote": null }
+    ],
+    "authorities": [],
+    "irreversible_actions": [],
+    "amendment_clauses": [
+      { "type": "governance", "quote": "This framework is intended to be flexible and adaptable." }
+    ],
+    "external_dependencies": []
+  },
+  "minimal_remediation": [
+    "Definition-lock trustworthy/appropriate with thresholds or procedures.",
+    "Add authority ledger + revocation + conflict-freeze.",
+    "Add irreversibility checkpoint + rollback/freeze semantics.",
+    "Enumerate governance failure modes.",
+    "Route amendments to external covenant."
+  ]
+}

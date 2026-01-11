@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://unai.example/schemas/omega-scan-v0.1.schema.json",
+  "title": "OmegaScanResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "audits", "violations", "extracted", "minimal_remediation"],
+  "properties": {
+    "verdict": { "type": "string", "enum": ["PASS", "REJECT"] },
+    "audits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["A1_definition_lock", "A2_authority_declaration", "A3_irreversibility_control", "A4_failure_enumeration", "A5_recursive_containment"],
+      "properties": {
+        "A1_definition_lock": { "$ref": "#/$defs/auditResult" },
+        "A2_authority_declaration": { "$ref": "#/$defs/auditResult" },
+        "A3_irreversibility_control": { "$ref": "#/$defs/auditResult" },
+        "A4_failure_enumeration": { "$ref": "#/$defs/auditResult" },
+        "A5_recursive_containment": { "$ref": "#/$defs/auditResult" }
+      }
+    },
+    "violations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/violation" }
+    },
+    "extracted": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normative_terms", "authorities", "irreversible_actions", "amendment_clauses", "external_dependencies"],
+      "properties": {
+        "normative_terms": { "type": "array", "items": { "$ref": "#/$defs/term" } },
+        "authorities": { "type": "array", "items": { "$ref": "#/$defs/authority" } },
+        "irreversible_actions": { "type": "array", "items": { "$ref": "#/$defs/irreversibleAction" } },
+        "amendment_clauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } },
+        "external_dependencies": { "type": "array", "items": { "$ref": "#/$defs/dependency" } }
+      }
+    },
+    "minimal_remediation": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Smallest set of edits required to make verdict PASS."
+    }
+  },
+  "$defs": {
+    "auditResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "rationale"],
+      "properties": {
+        "status": { "type": "string", "enum": ["PASS", "FAIL"] },
+        "rationale": { "type": "string" }
+      }
+    },
+    "violation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "audit", "message", "evidence"],
+      "properties": {
+        "code": { "type": "string" },
+        "severity": { "type": "string", "enum": ["CRITICAL", "MAJOR", "MINOR"] },
+        "audit": { "type": "string", "enum": ["A1", "A2", "A3", "A4", "A5"] },
+        "message": { "type": "string" },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quotes", "locations"],
+          "properties": {
+            "quotes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "locations": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "suggested_fix": { "type": "string" }
+      }
+    },
+    "term": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "usage_quotes", "is_defined", "definition_quote"],
+      "properties": {
+        "term": { "type": "string" },
+        "usage_quotes": { "type": "array", "items": { "type": "string" } },
+        "is_defined": { "type": "boolean" },
+        "definition_quote": { "type": ["string", "null"] }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "scope", "legitimacy_source", "revocation", "conflict_rule", "evidence_quotes"],
+      "properties": {
+        "name": { "type": "string" },
+        "scope": { "type": "string" },
+        "legitimacy_source": { "type": ["string", "null"] },
+        "revocation": { "type": ["string", "null"] },
+        "conflict_rule": { "type": ["string", "null"] },
+        "evidence_quotes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "irreversibleAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "trigger", "checkpoint_required", "rollback_defined", "evidence_quotes"],
+      "properties": {
+        "action": { "type": "string" },
+        "trigger": { "type": ["string", "null"] },
+        "checkpoint_required": { "type": "boolean" },
+        "rollback_defined": { "type": "boolean" },
+        "evidence_quotes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "quote"],
+      "properties": {
+        "type": { "type": "string", "enum": ["update", "amendment", "governance", "scope", "disclosure", "enforcement"] },
+        "quote": { "type": "string" }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "is_provided_in_input", "impact_if_missing"],
+      "properties": {
+        "name": { "type": "string" },
+        "is_provided_in_input": { "type": "boolean" },
+        "impact_if_missing": { "type": "string" }
+      }
+    }
+  }
+}

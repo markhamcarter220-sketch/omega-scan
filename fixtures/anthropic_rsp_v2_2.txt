@@ -1,0 +1,8 @@
+TITLE: Fixture Excerpt — RSP-style framework (short excerpt)
+NOTE: This is an intentionally short excerpt for testing Ω-SCAN mechanics.
+
+EXCERPT:
+- "Systems are classified into levels based on capability thresholds."
+- "We will strengthen safeguards over time as the threat model evolves."
+- "Leadership approves deployment decisions in consultation with safety leads."
+- "We will monitor and mitigate risks as appropriate."
