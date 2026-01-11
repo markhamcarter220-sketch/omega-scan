@@ -1,0 +1,47 @@
+{
+  "verdict": "PASS",
+  "audits": {
+    "A1_definition_lock": {
+      "status": "PASS",
+      "rationale": "All normative terms are operationally defined."
+    },
+    "A2_authority_declaration": {
+      "status": "PASS",
+      "rationale": "Authority holder, source of legitimacy, revocation, and conflict handling are explicit."
+    },
+    "A3_irreversibility_control": {
+      "status": "PASS",
+      "rationale": "Only reversible actions are permitted and safeguards are explicit."
+    },
+    "A4_failure_enumeration": {
+      "status": "PASS",
+      "rationale": "Multiple concrete governance failure modes are enumerated."
+    },
+    "A5_recursive_containment": {
+      "status": "PASS",
+      "rationale": "No self-amendment or scope expansion; external governance required."
+    }
+  },
+  "violations": [],
+  "extracted": {
+    "normative_terms": [
+      "Critical Incident",
+      "Freeze Action",
+      "Authorized Human Reviewer",
+      "Freeze Duration"
+    ],
+    "authorities": [
+      "Authorized Human Reviewer"
+    ],
+    "irreversible_actions": [],
+    "amendment_clauses": [
+      "External governance approval required"
+    ],
+    "external_dependencies": [
+      "Owning Organization Governance Charter",
+      "Authorized Human Reviewer Registry",
+      "Incident Detection Signal Definitions"
+    ]
+  },
+  "minimal_remediation": []
+}
